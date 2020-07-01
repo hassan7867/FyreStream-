@@ -1,0 +1,160 @@
+
+
+
+a.join-mob{
+	display:none;
+}
+
+@media (max-width :5000px) and (min-device-width :2000px){
+.item{
+	height:100vh;
+}
+}
+
+@media (max-width :1199px) and (min-device-width :992px){
+.slide-text {
+    margin:555px 0px 0px 0px;
+    padding: 28px 15px 28px 15px;
+    height: 500px;
+}
+
+#blog-demo.owl-carousel .owl-controls {
+    bottom: 175px !important;
+    right: -70px !important;
+}
+}
+
+@media (max-width :991px) and (min-device-width :768px){
+.slide-text {
+    margin: 615px 0px 0px 0px;
+    padding: 28px 15px 28px 15px;
+    height: 500px;
+}
+.slide-text p {
+    font-size: 12px;
+    line-height: 21px;
+}
+.slide-text h4 {
+    font-size: 10px;
+}
+#blog-demo.owl-carousel .owl-controls {
+    bottom: 175px !important;
+    right: -70px !important;
+}
+}
+
+@media (max-width :767px) and (min-device-width :280px){
+
+.admin-left {
+	display:none;
+}
+.admin-right {
+	padding:0px 15px;
+    float:none;
+    width:100%;
+}
+	
+/* a.join-mob{
+	display:block;
+	float:right;
+}
+.header-right {
+	display:none;
+} */
+
+
+
+	/***** header ****/
+
+.header {
+    padding: 15px 0px 15px 0px;
+}
+.logo {
+    width: 155px;
+}
+.logo a.logo1 {
+    width: 55px;
+}
+.logo a.logo2 {
+    margin: 4px 0px 0px 0px;
+    width: 95px;
+}
+.mid-logo {
+    bottom: -70px;
+}
+a.logo3 {
+    width:90px;
+}
+	
+	
+	
+	/***** admin *******/
+
+.admin {
+    margin: 55px 0px 0px 0px;
+}	
+.admin-row {
+    padding: 29px 15px 27px 15px;
+    width: 100%;
+    float: none;
+}
+.admin-row h3 {
+    font-size: 15px;
+	width: 240px;
+}
+.admin-row h3::before {
+    margin: 8px 0px 0px 0px;
+}
+.admin-row h3::after {
+    margin: 8px 0px 0px 0px;
+}
+.admins a.admn {
+    margin: 0px 5px 0px 0px;
+    width: 23%;
+}
+.admins a.admn4 {
+    margin:0px;
+}
+input.name {
+	margin:0px 0px 10px 0px;
+}
+input.name-left {
+    width: 100%;
+    float: none;
+}
+input.name-right {
+    width: 100%;
+    float: none;
+}
+.form1 {
+    margin: 0px 0px 0px 0px;
+}
+
+
+
+	/**** footer *****/
+	
+.footer {
+    margin: 45px 0px 0px 0px;
+}
+.footer-row {
+    width: 100%;
+}
+.ft-menu {
+	margin:0px auto 0px auto;
+    width:100%; text-align: center;
+}
+.ft-menu ul li {
+    margin: 0px 8px 0px 0px; float: none; display: inline-block;
+}
+ul.store {
+    margin: 25px auto 0px auto;
+    padding: 0px 0px 0px 0px;
+    width: 275px;
+}
+ul.store li {
+    width: 48%;
+}
+
+
+}

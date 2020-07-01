@@ -1,0 +1,25 @@
+@media screen and (max-width: 1359px) {
+#blog-demo.owl-carousel .owl-controls { position: relative; bottom: 254px !important; right: 0px !important;  }
+}
+
+@media screen and (max-width: 1199px) {
+
+}
+
+@media screen and (max-width: 991px) {
+.admin-left{width: 34%;}
+#blog-demo.owl-carousel .owl-controls { position: relative; bottom: 230px !important; right: 0px !important;  }
+}
+
+@media screen and (max-width: 767px) {
+.header-right{width: auto;}
+.admin-row .form1 ul li.last {font-size: 12px;}
+.lgn-mobile-hamb{display: block;}
+.header-right .login-nav {position: absolute;padding: 15px;background: #000;max-width: 100%;width: 100%;right: 0;top: 45px; display: none;}
+.header-right .login-nav li {margin: 5px 0 0 0;display: inline-block;float: none;width: 100%;text-align: left;}
+.header-right .login-nav li a{text-align: left;}
+.header-right .login-nav li .join{text-align: center;}
+.header .container-fluid{padding: 0;}
+.header .logo {width: 155px; left: 15px; position: relative;}
+a.creat {margin: 14px 0px 0px 0px;font-size: 16px;line-height: 44px;border-radius: 4px;}
+}
