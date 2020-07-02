@@ -25,19 +25,22 @@ Route::namespace('Web')->group(function () {
     Route::get('/timeline', 'TimelineController@index')->name('timeline'); 
 
     Route::get('/profile/{user_id}', 'ProfileController@index')->name('profile');
-     
+    Route::get('/settings/{user_id}', 'ProfileSettingsController@index')->name('settings');
+
     Route::get('/discover-members', 'ProfileController@suggestions')->name('discover_members');
     Route::get('/follow/{user_id}', 'FollowController@follow')->name('follow');
     
     Route::get('/accept_follow/{notification_from}/{notification_id}', 'FollowController@accept_follow')->name('accept_follow');
-    
+    Route::get('/reject_follow/{notification_from}/{notification_id}', 'FollowController@rejectFollow')->name('reject_follow');
+
     Route::post('/save-post-text', 'PostController@save_text_post')->name('add_post_text'); 
     Route::post('/save-post-image', 'PostController@save_image_post')->name('add_post_image');
     Route::post('/save-post-video', 'PostController@save_video_post')->name('add_post_video');
 
     
     Route::post('/save-comment', 'PostController@save_comment')->name('post_comment');
-    
+    Route::post('/save-settings', 'ProfileSettingsController@saveSettings')->name('save-settings');
+
     Route::get('/share-post', 'PostController@share_post')->name('share_post');
     Route::get('/react-post', 'PostController@react_post')->name('react_post');
     

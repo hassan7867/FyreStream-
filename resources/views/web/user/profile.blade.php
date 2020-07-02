@@ -71,106 +71,163 @@
                               <a class="rate-right" href="{{route('follow',$user_id)}}"><img src="/web/profile/images/follow.png" class="follow img-responsive"><span>Follow</span></a>
                               @endif
 
-                              @if($is_following)
+                              @if(Auth::user()->id != $user_id && $is_following == 1 && $requestStatus == 0)
+                                  <a class="rate-right" href="{{route('follow',$user_id)}}"><span style="padding-left: 12px;">Requested</span></a>
+                              @endif
+
+                              @if($is_following && $is_following == 1 && $requestStatus == 1)
                               <a class="rate-right" href="javascript:void(0)"><span style="padding-left: 12px;">Following</span></a>
                               @endif
                           </div>
                           
                           <div class="list-menu">
                               <ul>
-                                  <li><a class="active" href="#">Spotlight Wall</a></li>
-                                  <li><a href="#">Followers 12,777</a></li>
+                                  <li><a class="active" id="spotlight-li" onclick="changeTab()">Spotlight Wall</a></li>
+                                  <li><a id="followers-li" onclick="changeTab('followers')">Followers {{$followerNo}}</a></li>
                                   <li><a href="#">Photos</a></li>
                                   <li><a href="#">Videos</a></li>
                                   <li class="last"><a href="#">More</a></li>
                               </ul>
                           </div>
                       </div>
-                  
-                    <div class="torda">
-                        @if($isProfile==1)
-                        <div class="box1">
-                              <div class="part1">
-                                  <ul class="left">
-                                      <li><a class="active" href="javascript:void(0)"  data-toggle="modal" data-target="#textPostModal" flag="text"><img src="/web/profile/images/inverted.png" class="left-img img-responsive"><span>Status</span></a></li>
-                                      <li><a  data-toggle="modal" data-target="#textPostModal" ><i class="far fas fa-image"></i></a></li>
-                                      <li><a data-toggle="modal" data-target="#textPostModal" ><i class="fas fa-video"></i></a></li>
 
-                                  </ul>
+                      <div class="torda">
+                          <div class="suggestion-box" id="followers-tab" style="display: none">
+                              <div class="row">
 
-                                  <ul class="right">
-                                      <li><a href="#"><img src="/web/profile/images/moment.png" class="left-img img-responsive"><span>Moments</span></a></li>
-                                      <li><a href="#"><img src="/web/profile/images/market.png" class="left-img img-responsive"><span>Market Post</span></a></li>
-                                      <li class="last"><a href="#"><img src="/web/profile/images/more.png" class="left-img img-responsive"><span>More</span></a></li>
-                                  </ul>
-                              </div>
+                                  @if(count($data2)>0)
+                                      <?php $k = ($pageNo == 1) ? $pageNo : (($pageNo - 1) * $record_per_page) + 1;
+                                      $date = ''; ?>
+                                      @foreach($data2 as $row)
+                                          <div class="col-md-4 col-xs-6">
+                                              <div class="suggestion-card">
+                                                  <a href="{{route('profile',$row->id)}}">
+                                                      <img src="/image/profileImages/{{$row->profile_pic}}"
+                                                           class="suggestion-pic">
+                                                      <span class="suggestion-card__name"> {{$row->first_name}} {{$row->last_name}} </span>
+                                                      <!-- <span class="suggestion-card__cities">New Delhi</span> -->
+                                                  </a>
+                                                  <a class="join-btn mt-3"
+                                                     href="{{route('profile',$row->id)}}">Profile</a>
+                                              </div>
 
-                              <div class="part2">
-                                  <div class="part2-left">
-                                      <img src="/web/profile/images/tanya2.png" class="tnya img-responsive">
-                                  </div>
+                                          </div>
 
-                                  <div class="part2-right">
-                                     <form name="add-text-post" id="addTextPost" method="post" action="{{route('add_post_text')}}">
-                                      {{csrf_field()}}
-                                      <textarea class="area2" placeholder="What do you want to share now?" name="post_text"></textarea>
-                                      <a class="publish" href="#"><img src="/web/profile/images/send.png" class="send-img img-responsive"><span id="add_text_post">Publish</span></a>
-                                    </form>
-                                  </div>
+                                      @endforeach
+                                  @else
+                                      <div class="col-md-12 col-xs-12" style="padding-left: 36%">
+                                          <div class="suggestion-card" style="width: 44%">
+                                              No Suggestions
+                                          </div>
+                                      </div>
+                                  @endif
+                                  {{--                            <div class="box-footer clearfix">--}}
+                                  {{--                                <ul class="pagination pagination-sm no-margin pull-right">--}}
+                                  {{--                                    {!! $data2->links() !!}--}}
+                                  {{--                                </ul>--}}
+                                  {{--                            </div>--}}
                               </div>
                           </div>
-                        @endif
 
-                           <?php
-            if(count($data['records'])>0){
-           $k = ($pageNo == 1) ? $pageNo : (($pageNo - 1) * $record_per_page) + 1;
-          $date = ''; ?>
-          <?php 
+                          <div style="display: block" id="spotlight-wall-tab">
+                              @if($isProfile==1)
+                                  <div class="box1">
+                                      <div class="part1">
+                                          <ul class="left">
+                                              <li><a class="active" href="javascript:void(0)" data-toggle="modal"
+                                                     data-target="#textPostModal" flag="text"><img
+                                                              src="/web/profile/images/inverted.png"
+                                                              class="left-img img-responsive"><span>Status</span></a>
+                                              </li>
+                                              <li><a data-toggle="modal" data-target="#textPostModal"><i
+                                                              class="far fas fa-image"></i></a></li>
+                                              <li><a data-toggle="modal" data-target="#textPostModal"><i
+                                                              class="fas fa-video"></i></a></li>
 
-          foreach ($data['records'] as $key => $row) {
-            if(!empty($row->post_title)){
-              if($row->post_type == 0){?>
+                                          </ul>
 
-                @include('web.user.text_post_view')
-             <?php  }elseif($row->post_type == 1){?>
-                @include('web.user.image_post_view')
-              <?php }else{?>
-               @include('web.user.video_post_view')  
-             <?php }
-            }else{
-            
-            if($row->post->post_type == 0){?>
-                @include('web.user.sharepost.share_text_post_view')
-             <?php  }elseif($row->post->post_type == 1){?>
-                 @include('web.user.sharepost.share_image_post_view')
-              <?php }else{?>
-                @include('web.user.sharepost.share_video_post_view')
-             <?php }
-            }
-          }
-        }else{?>
-           <div class="box2">
-              <div class="box2-left">
-                <a href="#">
-                  No Record(s)
-                </a>
-              </div>
-            </div>
+                                          <ul class="right">
+                                              <li><a href="#"><img src="/web/profile/images/moment.png"
+                                                                   class="left-img img-responsive"><span>Moments</span></a>
+                                              </li>
+                                              <li><a href="#"><img src="/web/profile/images/market.png"
+                                                                   class="left-img img-responsive"><span>Market Post</span></a>
+                                              </li>
+                                              <li class="last"><a href="#"><img src="/web/profile/images/more.png"
+                                                                                class="left-img img-responsive"><span>More</span></a>
+                                              </li>
+                                          </ul>
+                                      </div>
 
-        <?php }?>
-          
+                                      <div class="part2">
+                                          <div class="part2-left">
+                                              <img src="/web/profile/images/tanya2.png" class="tnya img-responsive">
+                                          </div>
 
-               <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                  {!! $data['records']->links() !!}
-              </ul>
-          </div>
+                                          <div class="part2-right">
+                                              <form name="add-text-post" id="addTextPost" method="post"
+                                                    action="{{route('add_post_text')}}">
+                                                  {{csrf_field()}}
+                                                  <textarea class="area2" placeholder="What do you want to share now?"
+                                                            name="post_text"></textarea>
+                                                  <a class="publish" href="#"><img src="/web/profile/images/send.png"
+                                                                                   class="send-img img-responsive"><span
+                                                              id="add_text_post">Publish</span></a>
+                                              </form>
+                                          </div>
+                                      </div>
+                                  </div>
+                              @endif
 
-                        
-                          
-                          
+                              <?php
+                              if(count($data['records']) > 0){
+                              $k = ($pageNo == 1) ? $pageNo : (($pageNo - 1) * $record_per_page) + 1;
+                              $date = ''; ?>
+                              <?php
+
+                              foreach ($data['records'] as $key => $row) {
+                              if(!empty($row->post_title)){
+                              if($row->post_type == 0){?>
+
+                              @include('web.user.text_post_view')
+                              <?php  }elseif($row->post_type == 1){?>
+                              @include('web.user.image_post_view')
+                              <?php }else{?>
+                              @include('web.user.video_post_view')
+                              <?php }
+                              }else{
+
+                              if($row->post->post_type == 0){?>
+                              @include('web.user.sharepost.share_text_post_view')
+                              <?php  }elseif($row->post->post_type == 1){?>
+                              @include('web.user.sharepost.share_image_post_view')
+                              <?php }else{?>
+                              @include('web.user.sharepost.share_video_post_view')
+                              <?php }
+                              }
+                              }
+                              }else{?>
+                              <div class="box2">
+                                  <div class="box2-left">
+                                      <a href="#">
+                                          No Record(s)
+                                      </a>
+                                  </div>
+                              </div>
+
+                              <?php }?>
+
+
+                              <div class="box-footer clearfix">
+                                  <ul class="pagination pagination-sm no-margin pull-right">
+                                      {!! $data['records']->links() !!}
+                                  </ul>
+                              </div>
+
+
+                          </div>
                       </div>
-                  
+
                     
                   </div>
               </div>
@@ -754,6 +811,21 @@
   <script src="{{asset('web/plugins/dropzone/dist/dropzone.js')}}"></script>
   <script src="{{asset('web/js/timeline.js')}}"></script>
   <script type="text/javascript">
+
+      function changeTab(tabName) {
+          if (tabName === 'followers') {
+              $('#spotlight-li').removeClass('active')
+              $('#followers-li').addClass('active');
+              document.getElementById('followers-tab').style.display = 'block';
+              document.getElementById('spotlight-wall-tab').style.display = 'none';
+          } else {
+              $('#followers-li').removeClass('active')
+              $('#spotlight-li').addClass('active');
+              document.getElementById('followers-tab').style.display = 'none';
+              document.getElementById('spotlight-wall-tab').style.display = 'block';
+          }
+      }
+
      myDropzone = new Dropzone('div#pimageUpload', {
     addRemoveLinks: true,
     autoProcessQueue: false,

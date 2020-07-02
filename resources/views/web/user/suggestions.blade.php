@@ -6,40 +6,80 @@
       <div class="row">
         @include('web.common.leftsidebar')
         <div class="col-lg-7 col-sm-8 col-md-7 col-xs-12">
-            <div class="suggestion-box">
-               <div class="row">
+          <div class="suggestion-box">
+            <div class="row col-lg-12 text-center" style="padding-left: 7%;margin-top: 1%">
+              <span style="font-size: 17px;color: #373737;line-height: 25px;font-weight: 900;">Following</span>
+            </div>
+            <div class="row">
 
-                 @if(count($data['records'])>0)
-          <?php $k = ($pageNo == 1) ? $pageNo : (($pageNo - 1) * $record_per_page) + 1;
-          $date = ''; ?>
-          @foreach($data['records'] as $row)
-                   <div class="col-md-4 col-xs-6">
-                        <div class="suggestion-card">
-                           <a href="{{route('profile',$row->id)}}">
-                               <img src="/image/profileImages/{{$row->profile_pic}}" class="suggestion-pic">
-                                <span class="suggestion-card__name"> {{$row->first_name}} {{$row->last_name}} </span>
-                                <!-- <span class="suggestion-card__cities">New Delhi</span> -->
-                            </a>
-                            <a class="join-btn mt-3" href="{{route('profile',$row->id)}}">Profile</a>
-                        </div>
-                        
-                   </div>
+              @if(count($data2['records'])>0)
+                <?php $k = ($pageNo == 1) ? $pageNo : (($pageNo - 1) * $record_per_page) + 1;
+                $date = ''; ?>
+                @foreach($data2['records'] as $row)
+                  <div class="col-md-4 col-xs-6">
+                    <div class="suggestion-card">
+                      <a href="{{route('profile',$row->id)}}">
+                        <img src="/image/profileImages/{{$row->profile_pic}}" class="suggestion-pic">
+                        <span class="suggestion-card__name"> {{$row->first_name}} {{$row->last_name}} </span>
+                        <!-- <span class="suggestion-card__cities">New Delhi</span> -->
+                      </a>
+                      <a class="join-btn mt-3" href="{{route('profile',$row->id)}}">Profile</a>
+                    </div>
 
-              @endforeach
-                @else
-                <div class="col-md-4 col-xs-6">
-                  <div class="suggestion-card">
-                     No Suggestions
+                  </div>
+
+                @endforeach
+              @else
+                <div class="col-md-12 col-xs-12" style="padding-left: 36%">
+                  <div class="suggestion-card" style="width: 44%">
+                    No Suggestions
                   </div>
                 </div>
-                @endif
-                   <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                  {!! $data['records']->links() !!}
-              </ul>
-          </div>
-               </div> 
+              @endif
+              <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                  {!! $data2['records']->links() !!}
+                </ul>
+              </div>
             </div>
+          </div>
+          <div class="suggestion-box" style="margin-top: 1%">
+            <div class="row col-lg-12 text-center" style="padding-left: 7%;margin-top: 1%">
+              <span style="font-size: 17px;color: #373737;line-height: 25px;font-weight: 900;">Discover Members</span>
+            </div>
+            <div class="row">
+
+              @if(count($data['records'])>0)
+                <?php $k = ($pageNo == 1) ? $pageNo : (($pageNo - 1) * $record_per_page) + 1;
+                $date = ''; ?>
+                @foreach($data['records'] as $row)
+                  <div class="col-md-4 col-xs-6">
+                    <div class="suggestion-card">
+                      <a href="{{route('profile',$row->id)}}">
+                        <img src="/image/profileImages/{{$row->profile_pic}}" class="suggestion-pic">
+                        <span class="suggestion-card__name"> {{$row->first_name}} {{$row->last_name}} </span>
+                        <!-- <span class="suggestion-card__cities">New Delhi</span> -->
+                      </a>
+                      <a class="join-btn mt-3" href="{{route('profile',$row->id)}}">Profile</a>
+                    </div>
+
+                  </div>
+
+                @endforeach
+              @else
+                <div class="col-md-12 col-xs-12" style="padding-left: 36%">
+                  <div class="suggestion-card" style="width: 44%">
+                    No Suggestions
+                  </div>
+                </div>
+              @endif
+              <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                  {!! $data['records']->links() !!}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-lg-3 col-md-3 col-xs-12" style="padding-left: 0;">
           <div class="post-right">
