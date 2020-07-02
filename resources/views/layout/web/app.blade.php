@@ -177,7 +177,7 @@
                       <img src="/web/timeline/images/menu10.png" class="men img-responsive">
                     </a>
                   </li>
-                  <li>
+{{--                  <li>--}}
 
                   
 
@@ -203,7 +203,7 @@
                     </ul>
                   </li>
                     
-                  </li>
+{{--                  </li>--}}
                   @if(!empty(Auth::user()->id))
                    <li class="port dropdown hdr-user-dropdown">
                     <a class=" dropdown-toggle" type="button" data-toggle="dropdown">
@@ -213,6 +213,7 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li><a href="{{route('profile',Auth::user()->id)}}">Profile</a></li>
+                      <li><a href="{{route('settings',Auth::user()->id)}}">Settings</a></li>
                       <li><a href="{{route('user-logout')}}">Logout</a></li>
                     </ul>
                   </li>
