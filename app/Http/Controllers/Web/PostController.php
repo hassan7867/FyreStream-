@@ -249,6 +249,7 @@ class PostController extends Controller {
                     'comment' => $request->comment,
                     'user_image' => Auth::user()->profile_pic,
                     'image' => $fileName,
+                    'commentId' => $comment->id,
                     'errors' => 'Comment has been Published.'
 
                 ), 200);

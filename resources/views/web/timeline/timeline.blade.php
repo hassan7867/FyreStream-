@@ -2,7 +2,7 @@
 <style>
     .fake-input { position: relative; width:240px; }
     .fake-input input { display: block;
-        width: 540px;
+        width: 529px;
         box-sizing: border-box;
         height: 82px;
         padding-left: 71px;
@@ -31,13 +31,13 @@
                                     <li>
                                         <a class="select-post" data-toggle="modal" data-target="#textPostModal"
                                            flag="image">
-                                            <i class="far fas fa-image"></i>
+                                            <i class="far fas fa-image" style="margin-top: 8px!important;"></i>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="select-post" data-toggle="modal" data-target="#textPostModal"
                                            flag="video">
-                                            <i class="fas fa-video"></i>
+                                            <i class="fas fa-video" style="margin-top: 8px!important;"></i>
                                         </a>
                                     </li>
                                     <!-- <li class="last">
@@ -191,9 +191,9 @@
                         if($row->post_type == 0){?>
                         @include('web.common.text_post_view')
                         <?php  }elseif($row->post_type == 1){?>
-                        @include('web.common.image_post_view')
+                        @include('web.common.text_post_view')
                         <?php }else{?>
-                        @include('web.common.video_post_view')
+                        @include('web.common.text_post_view')
                         <?php }
                         }else{
                         // dd($row);
@@ -1033,30 +1033,30 @@
     <div class="modal fade new-popup-modal" id="textPostModal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" style="border: 6px solid black;border-radius: 20px!important;">
             <div class="modal-content">
                 <div class="modal-body">
-                    <ul class="nav nav-pills nav-custom mb-3" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-text-tab" data-toggle="pill" href="#pills-text"
-                               role="tab" aria-controls="pills-text" aria-selected="true">
+                    {{--<ul class="nav nav-pills nav-custom mb-3" id="pills-tab" role="tablist">--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link active" id="pills-text-tab" data-toggle="pill" href="#pills-text"--}}
+                               {{--role="tab" aria-controls="pills-text" aria-selected="true">--}}
 
-                                <h2 class="popup-custom-hdrs">Status </h2>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
-                               role="tab" aria-controls="pills-profile" aria-selected="false">
-                                <h2 class="popup-custom-hdrs">Image </h2>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"
-                               role="tab" aria-controls="pills-contact" aria-selected="false">
-                                <h2 class="popup-custom-hdrs">Video </h2>
-                            </a>
-                        </li>
-                    </ul>
+                                {{--<h2 class="popup-custom-hdrs">Status </h2>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"--}}
+                               {{--role="tab" aria-controls="pills-profile" aria-selected="false">--}}
+                                {{--<h2 class="popup-custom-hdrs">Image </h2>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"--}}
+                               {{--role="tab" aria-controls="pills-contact" aria-selected="false">--}}
+                                {{--<h2 class="popup-custom-hdrs">Video </h2>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
                     <div class="tab-content" id="pills-tabContent">
 
                         <div class="tab-pane show active" id="pills-text" role="tabpanel"
@@ -1069,7 +1069,7 @@
                                                class="tnya img-responsive img-circle" style="width: 48px;height: 45px;">
 
                                 </div>
-                                <div style="  background: #cccccc6b;padding: 13px;margin-top: 2px;text-align: center;">
+                                <div style="  background: #cccccc6b;padding: 13px;margin-top: 2px;text-align: center;" id="drop-area">
                                     <span>Drag and drop image/video here or</span> <span style="color: lightskyblue!important;cursor: pointer" onclick="uploadImage()">Browse</span>
                                     <input type="file" name="photo" id="photo" onchange="readURL(this)" style="display: none">
                                     <div style="display: none;margin-top: 2px!important;" id="show-photos">
@@ -1087,7 +1087,7 @@
                                                 <option>4</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-4" style="margin-left: 35px!important;" >
+                                        <div class="col-md-4" style="margin-left: 45px!important;" >
                                             <button style="height: 34px!important;border-radius: 5px!important;" >Friends Tagging</button>
                                         </div>
                                     <div class="col-md-1"><i class="fas fa-video" style="border-radius: 5px!important;font-size: 25px;margin-left: -20px;margin-top: 5px;" onclick="embeddVideo()" ></i></div>
@@ -1113,45 +1113,45 @@
                         </div>
 
 
-                        <div class="tab-pane" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                            <form id="imageForm" action="{{route('add_post_image')}}" method="post">
-                                {{csrf_field()}}
-                                <textarea class="form-control" name="post_text" placeholder="Status"></textarea>
+                        {{--<div class="tab-pane" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">--}}
+                            {{--<form id="imageForm" action="{{route('add_post_image')}}" method="post">--}}
+                                {{--{{csrf_field()}}--}}
+                                {{--<textarea class="form-control" name="post_text" placeholder="Status"></textarea>--}}
 
-                                <div class="form-group mb-0">
-                                    <label for="message-text" class="col-form-label mt-3">Upload or Drag Image</label>
-                                    <div id="imageUpload" class="dropzone"></div>
-                                    <div id="verificationUploadFormError" class="custom-error" style="display:none">Some
-                                        Error are in image uploading.
-                                    </div>
-                                </div>
-                                <div class="modal-footer text-right">
-                                    <button type="button" class="new-pro-btn-1 new-pro-btn-1-border"
-                                            data-dismiss="modal">Cancel
-                                    </button>
-                                    <button type="submit" id="finishImages" class="new-pro-btn-1">Post</button>
-                                </div>
-                            </form>
-                        </div>
+                                {{--<div class="form-group mb-0">--}}
+                                    {{--<label for="message-text" class="col-form-label mt-3">Upload or Drag Image</label>--}}
+                                    {{--<div id="imageUpload" class="dropzone"></div>--}}
+                                    {{--<div id="verificationUploadFormError" class="custom-error" style="display:none">Some--}}
+                                        {{--Error are in image uploading.--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="modal-footer text-right">--}}
+                                    {{--<button type="button" class="new-pro-btn-1 new-pro-btn-1-border"--}}
+                                            {{--data-dismiss="modal">Cancel--}}
+                                    {{--</button>--}}
+                                    {{--<button type="submit" id="finishImages" class="new-pro-btn-1">Post</button>--}}
+                                {{--</div>--}}
+                            {{--</form>--}}
+                        {{--</div>--}}
 
 
-                        <div class="tab-pane" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                            <form action="{{route('add_post_video')}}" method="post">
-                                {{csrf_field()}}
-                                <textarea class="form-control" name="post_text" placeholder="Status"></textarea>
-                                <hr>
-                                <textarea class="form-control" name="video_code"
-                                          placeholder="Embedded Video Code"></textarea>
+                        {{--<div class="tab-pane" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">--}}
+                            {{--<form action="{{route('add_post_video')}}" method="post">--}}
+                                {{--{{csrf_field()}}--}}
+                                {{--<textarea class="form-control" name="post_text" placeholder="Status"></textarea>--}}
+                                {{--<hr>--}}
+                                {{--<textarea class="form-control" name="video_code"--}}
+                                          {{--placeholder="Embedded Video Code"></textarea>--}}
 
-                                <div class="modal-footer text-right">
-                                    <button type="button" class="new-pro-btn-1 new-pro-btn-1-border"
-                                            data-dismiss="modal">Cancel
-                                    </button>
-                                    <button type="submit" class="new-pro-btn-1">Post</button>
-                                </div>
-                            </form>
+                                {{--<div class="modal-footer text-right">--}}
+                                    {{--<button type="button" class="new-pro-btn-1 new-pro-btn-1-border"--}}
+                                            {{--data-dismiss="modal">Cancel--}}
+                                    {{--</button>--}}
+                                    {{--<button type="submit" class="new-pro-btn-1">Post</button>--}}
+                                {{--</div>--}}
+                            {{--</form>--}}
 
-                        </div>
+                        {{--</div>--}}
 
 
                     </div>
@@ -1169,8 +1169,40 @@
     <script src="{{asset('web/plugins/dropzone/dist/dropzone.js')}}"></script>
     <script src="{{asset('web/js/timeline.js')}}"></script>
     <script type="text/javascript">
+        window.onload = function() {
+            let dropArea = document.getElementById("drop-area");
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false)
+            });
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            dropArea.addEventListener('drop', handleDrop.bind(this), false);
+            function handleDrop(e) {
+                let data = e.dataTransfer;
+                let files = data.files;
+                document.getElementById('photo').files=files
+                for (let j = 0; j < files.length; j++) {
+                    if (files[j].type.indexOf('image') !== -1) {
+                        this.readImageURL(files[j]);
+                    } else {
+                        this.readImageURL(files[j]);
+                    }
+                }
+            }
+        }
         function uploadImage() {
             document.getElementById("photo").click();
+        }
+        function readImageURL(files) {
+            document.getElementById("show-photos").style.display="block";
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.getElementById('photopreview').setAttribute('src', e.target.result);
+                }
+                reader.readAsDataURL(files);
         }
         function readURL(input) {
             document.getElementById("show-photos").style.display="block";

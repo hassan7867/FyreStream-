@@ -9,7 +9,7 @@
                 <!--
                         <ul>
                             <li><a href="#">Like (23)</a></li>
-                            <li><a href="#">Share (13)</a></li>   
+                            <li><a href="#">Share (13)</a></li>
                         </ul>
                         <img src="/web/timeline/images/reactions.png" class="react-pics img-responsive">
                         <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Nunc hendre rit mi. Intege<a href="#">+ 12 others</a></p>
@@ -36,13 +36,13 @@
                       $type =$row->myreact->react_type;
 
                       if($type == 0){
-                        $image = 'smile.png';
+                        $image = 'hugging_face.gif';
                       }elseif($type ==1){
-                        $image = 'angry.png';
+                        $image = 'pouting_face.gif';
                       }elseif ($type == 2) {
-                         $image = 'sad.png';
+                         $image = 'crying_face.gif';
                       }else{
-                        $image = 'laugh.png';
+                        $image = 'face_with_tears_of_joy.gif';
                         }  ?>
 
                         <a class="emoji-option-li myreact_{{$row->id}}" href="javascript:void(0)" post_id="{{$row->id}}"><img style="height: 22px;margin: 0 !important;" src="/image/{{$image}}" alt=""/>
@@ -51,23 +51,23 @@
 
 
                       <?php }else{?>
-                        <a class="emoji-option-li myreact_{{$row->id}}" href="javascript:void(0)" post_id="{{$row->id}}"><img style="height: 22px;margin: 0 !important;" src="/image/like.png" alt=""/>
-                            
+                        <a class="emoji-option-li myreact_{{$row->id}}" href="javascript:void(0)" post_id="{{$row->id}}"><img src="/image/like.png" style="height: 22px;width:22px!important;margin: 0 !important;">
+
                         </a>
-                        
+
 
                       <?php }?>
-                      
+
 
                           <div class="hover-emoji-option">
-                            <a class="react" href="javascript:void(0)" post_id="{{$row->id}}" type="0"><img src="/image/smile.png" alt=""/></a>
-                            <a class="react" href="javascript:void(0)" post_id="{{$row->id}}" type="1"><img src="/image/angry.png" alt=""/></a>
-                            <a class="react" href="javascript:void(0)" post_id="{{$row->id}}" type="2"><img src="/image/sad.png" alt=""/></a>
-                            <a class="react" href="javascript:void(0)" post_id="{{$row->id}}" type="3"><img src="/image/laugh.png" alt=""/></a>
+                            <a class="react" href="javascript:void(0)" post_id="{{$row->id}}" type="0"><img src="/image/hugging_face.gif" alt=""/></a>
+                            <a class="react" href="javascript:void(0)" post_id="{{$row->id}}" type="1"><img src="/image/pouting_face.gif" alt=""/></a>
+                            <a class="react" href="javascript:void(0)" post_id="{{$row->id}}" type="2"><img src="/image/crying_face.gif" alt=""/></a>
+                            <a class="react" href="javascript:void(0)" post_id="{{$row->id}}" type="3"><img src="/image/face_with_tears_of_joy.gif" alt=""/></a>
                           </div>
-                          
+
                         </div>
-                       
+
                         <?php if(!empty($row->myreact)){
 
 
@@ -75,15 +75,15 @@
                       $type =$row->myreact->react_type;
 
                       if($type == 0){
-                        $image = 'smile.png';
+                        $image = 'hugging_face.gif';
                       }elseif($type ==1){
-                        $image = 'angry.png';
+                        $image = 'pouting_face.gif';
                       }elseif ($type == 2) {
-                         $image = 'sad.png';
+                         $image = 'crying_face.gif';
                       }else{
-                        $image = 'laugh.png';
+                        $image = 'face_with_tears_of_joy.gif';
                         }  ?>
-                        
+
                         <span class="ml-2 liketooltip">{{count($row->reacts)}}
 
                           @if(count($row->reacts)>0)
@@ -95,7 +95,7 @@
                                 @else
                                 <ul class="liketooltiptext">
                                   <li>No reaction yet</li>
-                                    
+
                                 </ul>
 
                                 @endif
@@ -112,14 +112,14 @@
                                 @else
                                 <ul class="liketooltiptext">
                                   <li>No reaction yet</li>
-                                    
+
                                 </ul>
 
                                 @endif
                         </span>
 
                       <?php }?>
-                            
+
                       </li>
                       <li>
                          <a href="#">
@@ -143,120 +143,96 @@
                 </div>
 
 
-               
+
 
                   <div class="feedback2 new react_{{$row->id}}">
                   @foreach($row->comments as $comment)
                   <div class="comnt1" style="padding-bottom:20px;">
-                    <a   href="{{route('profile',$comment->user->id)}}"><img src="/image/profileImages/{{$comment->user->profile_pic}}" class="cmnt-pic img-responsive img-circle" style="width: 46px;
+                    <a   href="{{route('profile',$comment->user->id)}}"><img src="/image/profileImages/{{$comment->user->profile_pic}}"
+                                                                             class="cmnt-pic img-responsive img-circle" style="width: 46px;
     height: 44px;"></a>
-                    <div class="comnt-right">
-                      <div class="comnt1-text">
-                        <h4>{{$comment->user->first_name}} {{$comment->user->last_name}}
-                          <span>{{$comment->comment}}</span>
-                        </h4>
-                      </div>
-                       <!-- <a href="javascript:void(0)" id="reply">Reply</a> -->
-                     
-                        <div class="write-comment" id="Replycomment">
-                          <form name="postComment" id="" method="post">
-                              <div style="display: flex; align-items: flex-end;">
-                                  <img src="/image/profileImages/{{Auth::user()->profile_pic}}">
-                                  <textarea name="comment" class="commentText" placeholder="Write a Comment.."></textarea>
-                                  <a href="javascript:void(0)">
-                                    <button type="button" class="post_comment">Send</button>
-                                  </a>
-            
-                              </div>
-                            </form>
-                        </div>
+                      <div class="comnt-right">
+                          <div class="comnt1-text">
+                              <h4>{{$comment->user->first_name}} {{$comment->user->last_name}}
+                                  <span>{{$comment->comment}}</span>
+                                  <div style="margin-top: 10px!important;">
+                                      <img style="width: 150px!important;;height: 150px!important;"
+                                           src="/image/{{$comment->image}}">
+                                  </div>
+                                  <div style="margin-top: 12px!important;font-size: 12px!important;"
+                                       onclick="replyComment('{{$comment->id}}')">Reply
+                                  </div>
+                                  <br>
+                                  <div style="display: none; align-items: flex-end;" id="reply-section{{$comment->id}}">
+                                      <input type="hidden" id="comment-id{{$comment->id}}">
+                                      <input name="comment" class="form-control" id="reply-message-{{$comment->id}}"
+                                             placeholder="Write a Comment..">
+                                      <br>
+                                      <a href="javascript:void(0)">
+                                          <button type="button" class="btn btn-primary btn-sm" onclick="replying({{$comment->id}})">
+                                              Reply
+                                          </button>
+                                      </a>
 
-                     <!--  <div class="comnt-row">
-                        <div class="row">
-                          <div class="col-lg-8 col-sm-8 col-12">
-                            <ul class="left2-list">
-                              <li style="display:none" class="last">
-                                <a href="#">
-                                  <span>12</span>
-                                  <img src="/web/timeline/images/reaction2.png" class="rc2 img-responsive">
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <img src="/web/timeline/images/like.png" class="lk-pic img-responsive">
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <img src="/web/timeline/images/reply.png" class="lk-pic img-responsive">
-                                  <span>Respond</span>
-                                  <span class="gray-color">4d</span>
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <img src="/web/timeline/images/new-icon-4.png" class="lk-pic img-responsive">
-                                  <span>+25 replies</span>
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#"></a>
-                              </li>
-                              <br>
-                              <li>
-                                <a href="#">
-                                  <img src="/web/timeline/images/img-5.png" alt="" />
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <img src="/web/timeline/images/img-6.png" alt="" />&nbsp;
-                                  <b>Jew David</b> + 10 replies</a>
-                              </li>
-                            </ul>
+                                  </div>
+                                  @foreach(\App\ReplyCommentTable::where('id_comment',$comment->id)->get() as $replyItem)
+                                      <div id="reply-div-{{$comment->id}}">
+                                          <div style="color: grey;margin-top: 10px!important;margin-left: 2px!important;">
+                                              <span style="color: #004080;font-weight: bold;font-size: 15px">{{\App\User::where('id',$replyItem->id_user)->first()['first_name']}}</span>
+                                              <span style="margin-right: 10px!important;color: #004080;font-weight: bold;font-size: 15px">{{\App\User::where('id',$replyItem->id_user)->first()['last_name']}}</span>
+                                              {{$replyItem->message}}
+                                          </div>
+                                      </div>
+                                  @endforeach
+                              </h4>
                           </div>
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <ul class="right2-list">
-                              <li>
-                                <a href="#">
-                                  <span style="color:#0d006e;">+ 12</span>
-                                  <img src="/web/timeline/images/reaction2.png" class="fd-pic img-responsive">
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div> -->
-                    </div>
+                      </div>
                   </div>
                   @endforeach
 
                 </div>
-               
-                
-                <div class="write-comment">
-                  <form name="postComment" id="postComment_{{$row->id}}" method="post">
-                    {{csrf_field()}}
-                    <input type="hidden" name="post_id" value="{{$row->id}}">
-                  <div style="display: flex; align-items: flex-end;">
-                    
-                      <img  class="img-circle img-responsive commentProfileImage" src="/image/profileImages/{{Auth::user()->profile_pic}}">
-                      <textarea name="comment" class="commentText" placeholder="Write a Comment.."></textarea>
-                      <a href="javascript:void(0)">
-                        <button type="button" post_id="{{$row->id}}" class="post_comment">Send</button>
-                      </a>
-                   
-                    
+
+
+                  <div class="write-comment" style="width: 96%!important;margin-top: 23px!important;">
+                      <form name="postComment" id="postComment_{{$row->id}}" method="post" enctype="multipart/form-data">
+                          {{csrf_field()}}
+                          <input type="hidden" name="post_id" value="{{$row->id}}">
+                          <div style="display: flex; align-items: flex-end;">
+
+                              <img class="img-circle img-responsive commentProfileImage"
+                                   src="/image/profileImages/{{Auth::user()->profile_pic}}">
+                              <div style="  display:inline-block;position:relative;">
+                        <textarea name="comment" id="post-comment-{{$row->id}}" placeholder="Write a Comment.."
+                                  style="display:block;width: 400px;margin-left: 10px"></textarea>
+                                  <script type="text/javascript">
+                                      $(document).ready(function () {
+                                          $('#post-comment-' + '{{$row->id}}').emojioneArea({
+                                              pickerPosition: "bottom"
+                                          });
+                                      })
+                                  </script>
+                                  <i class="fas fa-camera"
+                                     style="position:absolute;bottom:10px;right:33px;cursor: pointer!important;" title="Add image"
+                                     onclick="uploadCommentImage('{{$row->id}}')" accept="image/*"></i>
+                                  <input type="file" name="image" id="comment-photo-{{$row->id}}" onchange="readPicURL(this)"
+                                         style="display: none">
+                              </div>
+                              <a href="javascript:void(0)">
+                                  <button type="button" post_id="{{$row->id}}" class="post_comment">Send</button>
+                              </a>
+                          </div>
+                          <img id="pic-preview{{$row->id}}" style="width: 100px!important;margin-top: 5px;margin-left: 45px">
+                          <input type="hidden" value="{{csrf_token()}}" id="csrf-token">
+
+                      </form>
                   </div>
-                </form>
-                </div>
               </div>
             </div>
-            
-            
+
+
 <script>
     $(document).ready(function(){
-      $("#Replycomment").hide();  
+      $("#Replycomment").hide();
       $("#reply").click(function(){
         $("#Replycomment").toggle();
       });
