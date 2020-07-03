@@ -1,4 +1,14 @@
 <div class="box2">
+    <style type="text/css">
+        .reply-comment-class{
+            margin-top: 12px!important;font-size: 12px!important;
+            cursor: pointer!important;
+            margin-left: 10px!important;
+        }
+        .reply-comment-class:hover{
+            text-decoration: underline;
+        }
+    </style>
     <link href="{{asset('web/css/emojionearea.min.css')}}" type="text/css" rel="stylesheet">
     <div class="box2-left">
         <a href="{{route('profile',$row->user->id)}}">
@@ -14,7 +24,7 @@
             <ul>
                 <li>
                     <a href="#">
-                        <img src="/web/timeline/images/world.png" class="world img-responsive">
+                        <img src="/web/timeline/images/world.png" style="padding-top: 10px;padding-right: 2px;" class="world img-responsive">
                     </a>
                 </li>
                 <li class="last">
@@ -35,6 +45,11 @@
                 <p class="b-bottom" id="append_result_{{$row->id}}">{{$row->post_title}}</p>
             @endif
         @endif
+        <p class="b-bottom" id="append_result_{{$row->id}}">
+            @if(!empty($row->image_name))
+            <img src="/image/postImages/{{$row->image_name}}" class="tnya-vid img-responsive">
+                @endif
+        </p>
         <div class="row t-b-space">
             <div class="col-lg-4 col-sm-4 col-12">
                 <div class="sandy-react emoji-react-outer" style="border:none;">
@@ -64,9 +79,10 @@
 
                                 <?php }else{?>
                                 <a class="emoji-option-li myreact_{{$row->id}}" href="javascript:void(0)"
-                                   post_id="{{$row->id}}"><i class="far fa-thumbs-up" style="font-size: 19px!important;"></i><span>Like</span>
+                                   post_id="{{$row->id}}"><img src="/image/like.png"
+                                                               style="height: 22px;width:22px!important;margin: 0 !important;">
                                     {{--<img style="height: 22px;margin: 0 !important;"--}}
-                                                               {{--src="/image/like.png" alt=""/>--}}
+                                    {{--src="/image/like.png" alt=""/>--}}
 
                                 </a>
 
@@ -142,11 +158,13 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="far fa-comment-alt" aria-hidden="true" style="padding-top: 8px;"></i>{{count($row->comments)}}</a>
+                                <i class="far fa-comment-alt" aria-hidden="true"
+                                   style="padding-top: 8px;padding-right: 5px;"></i>{{count($row->comments)}}</a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" class="sharepopup" post_id="{{$row->id}}">
-                                <i class="fas fa-share" aria-hidden="true" style="padding-top: 7px;"></i>{{count($row->share)}}</a>
+                                <i class="fas fa-share" aria-hidden="true"
+                                   style="padding-top: 7px;padding-right: 5px;"></i>{{count($row->share)}}</a>
                         </li>
                     </ul>
                 </div>
@@ -166,100 +184,45 @@
                 <div class="comnt1" style="padding-bottom:20px;">
                     <a href="{{route('profile',$comment->user->id)}}"><img
                                 src="/image/profileImages/{{$comment->user->profile_pic}}"
-                                class="cmnt-pic img-responsive img-circle" style="width: 46px;
-    height: 44px;"></a>
+                                class="cmnt-pic img-responsive img-circle" style="width: 46px;height: 44px;"></a>
                     <div class="comnt-right">
                         <div class="comnt1-text">
                             <h4>{{$comment->user->first_name}} {{$comment->user->last_name}}
                                 <span>{{$comment->comment}}</span>
-                                <div style="margin-top: 10px!important;">
-                                    <img style="width: 150px!important;;height: 150px!important;"
-                                         src="/image/{{$comment->image}}">
-                                </div>
-                                <div style="margin-top: 12px!important;font-size: 12px!important;"
-                                     onclick="replyComment('{{$comment->id}}')">Reply
+                                @if(!empty($comment->image))
+                                    <div style="margin-top: 10px!important;">
+                                        <img style="width: 150px!important;;height: 150px!important;"
+                                             src="/image/{{$comment->image}}">
+                                    </div>
+                                @endif
+                                <div onclick="replyComment('{{$comment->id}}')" class="reply-comment-class">- Reply
                                 </div>
                                 <br>
                                 <div style="display: none; align-items: flex-end;" id="reply-section{{$comment->id}}">
-                                    <input type="hidden" id="comment-id">
-                                    <input name="comment" class="form-control" id="reply-message"
+                                    <input type="hidden" id="comment-id{{$comment->id}}">
+                                    <input name="comment" class="form-control" id="reply-message-{{$comment->id}}"
                                            placeholder="Write a Comment..">
                                     <br>
                                     <a href="javascript:void(0)">
-                                        <button type="button" class="btn btn-primary btn-sm" onclick="replying()">
+                                        <button type="button" id="hide-button-{{$comment->id}}" class="btn btn-primary btn-sm"
+                                                onclick="replying({{$comment->id}})" style="font-size: 11px!important;">
                                             Reply
                                         </button>
                                     </a>
 
                                 </div>
-                                @foreach(\App\ReplyCommentTable::where('id_comment',$comment->id)->get() as $replyItem)
-                                    <div id="reply-div-{{$comment->id}}">
-                                        <div style="color: grey;margin-top: 10px!important;margin-left: 2px!important;">
-                                            <span style="color: #004080;font-weight: bold">{{\App\User::where('id',$replyItem->id_user)->first()['first_name']}}</span>
-                                            <span style="margin-right: 10px!important;color: #004080;font-weight: bold">{{\App\User::where('id',$replyItem->id_user)->first()['last_name']}}</span>
+
+                                <div id="reply-div-{{$comment->id}}">
+                                    @foreach(\App\ReplyCommentTable::where('id_comment',$comment->id)->get() as $replyItem)
+                                        <div style="border-left: 1px solid black;color: grey;margin-top: 17px!important;margin-left: 2px!important;padding-left: 12px;height: 26px">
+                                            <span style="color: #004080;font-weight: bold;font-size: 15px">{{\App\User::where('id',$replyItem->id_user)->first()['first_name']}}</span>
+                                            <span style="margin-right: 10px!important;color: #004080;font-weight: bold;font-size: 15px">{{\App\User::where('id',$replyItem->id_user)->first()['last_name']}}</span>
                                             {{$replyItem->message}}
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </h4>
                         </div>
-
-                        <!--   <div class="comnt-row">
-                            <div class="row">
-                              <div class="col-lg-8 col-sm-8 col-12">
-                                <ul class="left2-list">
-                                  <li style="display:none" class="last">
-                                    <a href="#">
-                                      <span>12</span>
-                                      <img src="/web/timeline/images/reaction2.png" class="rc2 img-responsive">
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#">
-                                      <img src="/web/timeline/images/like.png" class="lk-pic img-responsive">
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#">
-                                      <img src="/web/timeline/images/reply.png" class="lk-pic img-responsive">
-                                      <span>Respond</span>
-                                      <span class="gray-color">4d</span>
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#">
-                                      <img src="/web/timeline/images/new-icon-4.png" class="lk-pic img-responsive">
-                                      <span>+25 replies</span>
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#"></a>
-                                  </li>
-                                  <br>
-                                  <li>
-                                    <a href="#">
-                                      <img src="/web/timeline/images/img-5.png" alt="" />
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#">
-                                      <img src="/web/timeline/images/img-6.png" alt="" />&nbsp;
-                                      <b>Jew David</b> + 10 replies</a>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="col-lg-4 col-sm-4 col-12">
-                                <ul class="right2-list">
-                                  <li>
-                                    <a href="#">
-                                      <span style="color:#0d006e;">+ 12</span>
-                                      <img src="/web/timeline/images/reaction2.png" class="fd-pic img-responsive">
-                                    </a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div> -->
                     </div>
                 </div>
             @endforeach
@@ -287,15 +250,15 @@
                         </script>
                         <i class="fas fa-camera"
                            style="position:absolute;bottom:10px;right:33px;cursor: pointer!important;" title="Add image"
-                           onclick="uploadImage('{{$row->id}}')" accept="image/*"></i>
-                        <input type="file" name="image" id="comment-photo-{{$row->id}}" onchange="readURL(this)"
+                           onclick="uploadCommentImage('{{$row->id}}')" accept="image/*"></i>
+                        <input type="file" name="image" id="comment-photo-{{$row->id}}" onchange="readPicURL(this)"
                                style="display: none">
                     </div>
                     <a href="javascript:void(0)">
-                        <button type="button" post_id="{{$row->id}}" class="post_comment">Send</button>
+                        <button type="button" post_id="{{$row->id}}" class="post_comment" onclick="commentFunction({{$row->id}})">Send</button>
                     </a>
                 </div>
-                <img id="photopreview{{$row->id}}" style="width: 100px!important;margin-top: 5px;margin-left: 45px">
+                <img id="pic-preview{{$row->id}}" style="width: 100px!important;margin-top: 5px;margin-left: 45px">
                 <input type="hidden" value="{{csrf_token()}}" id="csrf-token">
 
             </form>
@@ -305,17 +268,17 @@
 <script>
     let rowId = "";
 
-    function uploadImage(id) {
+    function uploadCommentImage(id) {
         rowId = id;
         document.getElementById("comment-photo-" + rowId).click();
     }
 
-    function readURL(input) {
+    function readPicURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                document.getElementById('photopreview' + rowId).setAttribute('src', e.target.result);
+                document.getElementById('pic-preview' + rowId).setAttribute('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -324,12 +287,12 @@
     function replyComment(commentId) {
 
         document.getElementById("reply-section" + commentId).style.display = "block";
-        document.getElementById("comment-id").value = commentId;
+        document.getElementById("comment-id" + commentId).value = commentId;
     }
 
-    function replying() {
-        let commentId = document.getElementById('comment-id').value;
-        let message = document.getElementById('reply-message').value;
+    function replying(commentId) {
+        // let commentId = document.getElementById('comment-id' + commentId).value;
+        let message = document.getElementById('reply-message-' + commentId).value;
         $.ajax({
             url: `{{env('APP_URL')}}/reply/comment`,
             type: 'POST',
@@ -341,15 +304,23 @@
             },
             success: function (data) {
 
-                var comment_div = '<div style="color: grey;margin-top: 10px!important;margin-left: 2px!important;"><span style="color: #004080;font-weight: bold">' + data.fname + '</span> <span style="margin-right: 10px!important;color: #004080;font-weight: bold">' + data.lname + '</span>' + data.comment + '</div>'
+                var comment_div = '<div style="    color: grey;' +
+                    '    margin-top: 17px!important;' +
+                    '    margin-left: 2px!important;' +
+                    '    padding-left: 12px;' +
+                    '    height: 26px;' +
+                    '    border-left: 1px solid black;"><span style="color: #004080;font-weight: bold;font-size: 15px!important;">' + data.fname + '</span> <span style="margin-right: 10px!important;color: #004080;font-weight: bold;font-size: 15px">' + data.lname + '</span>' + data.comment + '</div>'
+                console.log(document.getElementById("reply-div-" + commentId))
                 $("#reply-div-" + commentId).append(comment_div);
-                $("#reply-message").val('');
+                $("#reply-message-" + commentId).val('');
+                // document.getElementById('hide-button-'+commentId).style.display="none";
+                $("#hide-button-" + commentId).val('');
             },
         });
     }
 
-    $(".post_comment").click(function () {
-        var post_id = $(this).attr('post_id');
+    function commentFunction(postId){
+        var post_id = postId;
 
         var url = '/save-comment';
         var method = "post";
@@ -375,11 +346,42 @@
             cache: false,
             processData: false,
             success: function (data) {
-                var comment_div = '<div class="comnt1" style="padding-bottom:20px;"><img  style="width: 46px;height: 44px;" src="/image/profileImages/' + data.user_image + '"  class="cmnt-pic img-responsive img-circle"><div class="comnt-right"><div class="comnt1-text"><h4>' + data.user_name + '<img style="width: 30px!important;;height: 30px!important;" src="/image/' + data.image + '"><span>' + data.comment + '</span></h4></div></div></div>'
+
+                console.log("commentId",data.commentId);
+                let replySection = '<div style="display: none; align-items: flex-end;" id="reply-section'+data.commentId+'">\n' +
+                    '                                    <input type="hidden" id="comment-id'+data.commentId+'">\n' +
+                    '                                    <input name="comment" class="form-control" id="reply-message-'+data.commentId+'"\n' +
+                    '                                           placeholder="Write a Comment..">\n' +
+                    '                                    <br>\n' +
+                    '                                    <a href="javascript:void(0)">\n' +
+                    '                                        <button type="button" id="hide-button-'+data.commentId+'" class="btn btn-primary btn-sm"\n' +
+                    '                                                onclick="replying('+data.commentId+')" style="font-size: 11px!important;">\n' +
+                    '                                            Reply\n' +
+                    '                                        </button>\n' +
+                    '                                    </a>\n' +
+                    '\n' +
+                    '                                </div>'
+                let replyDiv = '<div id="reply-div-'+data.commentId+'"></div>';
+                if (data.image === ''){
+                    var comment_div = '<div class="comnt1" style="padding-bottom:20px;"><img  style="width: 46px;height: 44px;" src="/image/profileImages/' + data.user_image + '"  class="cmnt-pic img-responsive img-circle">' +
+                        '<div class="comnt-right"><div class="comnt1-text"><h4>' + data.user_name + '<span style="margin-left: 6px!important;">' + data.comment + '</span><br>' +'<div style="margin-top: 12px!important;font-size: 12px!important;" class="reply-comment-class" onclick="replyComment('+data.commentId+')">' + "- Reply" + '</div><br>'+
+                        ''+replySection+''+replyDiv+'</h4></div></div></div>'
+                } else {
+
+                    var comment_div = '<div class="comnt1" style="padding-bottom:20px;"><img  style="width: 46px;height: 44px;" src="/image/profileImages/' + data.user_image + '"  class="cmnt-pic img-responsive img-circle">' +
+                        '<div class="comnt-right"><div class="comnt1-text"><h4>' + data.user_name + '<span style="margin-left: 6px!important;">' + data.comment + '</span><br>' +
+                        '<div style="margin-top: 12px!important;font-size: 12px!important;" class="reply-comment-class" onclick="replyComment('+data.commentId+')">' + "Reply" + '</div><br>'+
+                        ''+replySection+''+replyDiv+'<img style="width: 150px!important;height: 150px!important;margin-top: 7px" src="/image/' + data.image + '"></h4></div></div></div>'
+                }
+                console.log(post_id);
+                document.getElementById('post-comment-'+post_id).value="";
                 $(".react_" + post_id).append(comment_div);
-                $(".commentText").val('');
             },
         });
+    }
+
+    $("#send-comment-btn").click(function () {
+
     });
 </script>
 <script src="{{asset('web/js/emojionearea.min.js')}}"></script>
