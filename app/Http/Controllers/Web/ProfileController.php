@@ -105,7 +105,7 @@ class ProfileController extends Controller
     public function suggestions(Request $request)
     {
 
-        $my_followings = Follower::where('follower_id', Auth::user()->id)->pluck('user_id');
+        $my_followings = Follower::where(['follower_id' => Auth::user()->id,'status' => 1])->pluck('user_id');
         //dd($my_followings);
         $notifications = Notification::where('user_id', Auth::user()->id)->where('status', 0)->get();
 
