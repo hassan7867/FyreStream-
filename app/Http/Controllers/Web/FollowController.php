@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\ProfileSettingsTable;
 use Illuminate\Http\Request;
 use App\Follower;
 use App\Notification;
@@ -43,19 +44,32 @@ class FollowController extends Controller {
         $is_following = Follower::where('user_id',$user_id)->where('follower_id',Auth::user()->id)->count();
         //$user = User::find($user_id);  
          
-         if(!$is_following){
+         if(ProfileSettingsTable::where('user_id', $user_id)->exists() && ProfileSettingsTable::where('user_id', $user_id)->first()['privacy'] == 0){
             $follow = new Follower();
             $follow->user_id = $user_id;
             $follow->follower_id = Auth::user()->id;
+            $follow->status = 1;
             $follow->save();
-            $message = Auth::user()->first_name." ".Auth::user()->last_name." has requested to follow you.";
+            $message = Auth::user()->first_name." ".Auth::user()->last_name." has followed you.";
             $this->notifyUser($user_id,Auth::user()->id,$message);
-
-
-
+         }elseif (ProfileSettingsTable::where('user_id', $user_id)->exists() && ProfileSettingsTable::where('user_id', $user_id)->first()['privacy'] == 1)
+         {
+             $follow = new Follower();
+             $follow->user_id = $user_id;
+             $follow->follower_id = Auth::user()->id;
+             $follow->status = 0;
+             $follow->save();
+             $message = Auth::user()->first_name." ".Auth::user()->last_name." has requested to follow you.";
+             $this->notifyUser($user_id,Auth::user()->id,$message);
+         }else{
+             $follow = new Follower();
+             $follow->user_id = $user_id;
+             $follow->follower_id = Auth::user()->id;
+             $follow->status = 1;
+             $follow->save();
+             $message = Auth::user()->first_name." ".Auth::user()->last_name." has followed you.";
+             $this->notifyUser($user_id,Auth::user()->id,$message);
          }
-
-
         return redirect()->back();
 
         
@@ -68,8 +82,6 @@ class FollowController extends Controller {
         $notification->notification_from = $notification_from;
         $notification->message = $message;
         $notification->save();
-
-
     }
 
     public  function accept_follow($notification_from,$notification_id, Request $request){
@@ -82,6 +94,15 @@ class FollowController extends Controller {
         $follow->status=1;
         $follow->update();
         return Redirect::route('profile',$notification_from);
+    }
+
+    public  function rejectFollow($notification_from,$notification_id, Request $request){
+
+        Follower::where('user_id',Auth::user()->id)->where('follower_id',$notification_from)->first()->delete();
+        $notification = Notification::find($notification_id);
+        $notification->status = 1;
+        $notification->save();
+        return redirect()->back();
     }
 
 

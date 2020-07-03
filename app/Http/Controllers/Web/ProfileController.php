@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\ProfileSettingsTable;
 use Illuminate\Http\Request;
 use App\Follower;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,16 @@ class ProfileController extends Controller
             $isProfile=0;
         }
         $user = User::where('id', $user_id)->where('status', 1)->first();
-        $is_following = Follower::where('user_id', $user_id)->where('follower_id', Auth::user()->id)->count();
+
+            $is_following = Follower::where('user_id', $user_id)->where('follower_id', Auth::user()->id)->exists();
+            if($is_following == 1)
+            {
+                $requestStatus = Follower::where('user_id', $user_id)->where('follower_id', Auth::user()->id)->first()['status'];
+            }
+            else{
+                $requestStatus = 0;
+            }
+
         $notifications = Notification::where('user_id', Auth::user()->id)->where('status', 0)->get();
 
         $posts = Post::where('user_id', $user_id)->with('comments.user')->get();
@@ -65,8 +75,17 @@ class ProfileController extends Controller
 
         $this->data['records'] = $posts->merge($shared_posts)->sortByDesc('created_at')->paginate($this->record_per_page);
         //dd($this->data['records']);
+        $followerNo = Follower::where('user_id', $user_id)->get()->count();
+        $followersArray = [];
+            $followers = Follower::where('user_id', $user_id)->get();
+            foreach ($followers as $follower) {
+                array_push($followersArray, User::where('id', $follower->follower_id)->where('user_type', 1)->first());
+            }
+
         return view('web.user.profile', [
             'data' => $this->data,
+            'data2' => $followersArray,
+            'requestStatus' => $requestStatus,
             'pageNo' => @$pageNo,
             'record_per_page' => $this->record_per_page,
             'request' => $request,
@@ -75,7 +94,8 @@ class ProfileController extends Controller
             'is_following' => $is_following,
             'notifications' => $notifications,
             'posts' => $posts,
-                'isProfile'=>$isProfile
+                'isProfile'=>$isProfile,
+                'followerNo'=>$followerNo
                 ]
         );
 
@@ -85,15 +105,19 @@ class ProfileController extends Controller
     public function suggestions(Request $request)
     {
 
-        $my_followings = Follower::where('follower_id', Auth::user()->id)->pluck('user_id');
+        $my_followings = Follower::where(['follower_id' => Auth::user()->id,'status' => 1])->pluck('user_id');
         //dd($my_followings);
         $notifications = Notification::where('user_id', Auth::user()->id)->where('status', 0)->get();
 
         $suggestion = User::whereNotIn('id', $my_followings)->where('id', '!=', Auth::user()->id)->where('user_type', 1);
         $this->data['records'] = $suggestion->paginate($this->record_per_page);
 
+        $suggestion2 = User::whereIn('id', $my_followings)->where('id', '!=', Auth::user()->id)->where('user_type', 1);
+        $this->data2['records'] = $suggestion2->paginate($this->record_per_page);
+
         return view('web.user.suggestions', [
             'data' => $this->data,
+            'data2' => $this->data2,
             'pageNo' => @$pageNo,
             'record_per_page' => $this->record_per_page,
             'suggestion' => $suggestion,
