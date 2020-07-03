@@ -192,8 +192,8 @@
                       </li>
                       @if(count($notifications)>0)
                        @foreach($notifications as $notify)
-                      <li><p>{{$notify->message}}</p><a class="req-cta req-accept-btn" href="{{route('accept_follow',[$notify->notification_from,$notify->id])}}">Accept</a> </li>
-                      @endforeach  
+                          <li><p>{{$notify->message}}</p><a class="req-cta req-accept-btn" href="{{route('accept_follow',[$notify->notification_from,$notify->id])}}">Accept</a><a style="margin-left: 2%;background-color: red;font-weight: 400;background: #fff;display: inline-block;width: auto;border-radius: 4px;border: 1px solid red;color: red;line-height: 16px;padding: 4px 8px;font-size: 13px;" href="{{route('reject_follow',[$notify->notification_from,$notify->id])}}">Reject</a> </li>
+                        @endforeach
                       <li class="noti-dropdown-ftr"><a class="view-all-noti" href="">View All</a></li> 
                       @else
                       <li><p>No Notification</li>
