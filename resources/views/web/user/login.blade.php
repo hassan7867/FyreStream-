@@ -27,9 +27,9 @@
                         <a class="join join-mob" href="{{route('user-register')}}">Join</a>
 					</div>
                     
-					<div class="mid-logo">
-						<a class="logo3" href="index.html"><img src="/web/images/logo3.png" class="logo-pic img-responsive"></a>
-					</div>
+{{--					<div class="mid-logo">--}}
+{{--						<a class="logo3" href="index.html"><img src="/web/images/logo3.png" class="logo-pic img-responsive"></a>--}}
+{{--					</div>--}}
 				</div>        
 			</div>
 		</div><!-- end of header -->
