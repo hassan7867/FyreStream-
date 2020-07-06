@@ -5,7 +5,7 @@
                               <a href="#" class="on-pro"><img src="/web/profile/images/pro.png" class="img-responsive"></a>
                               </div>
                               
-                              <div class="box2-right">
+                              <div class="box2-right" style="width: 86%">
                                   <h4>{{$user->first_name}} {{$user->last_name}} Shared a post</h4>
                                   <p>{{$row->text}}</p>
                                   <p>{{$row->post->post_title}} </p>

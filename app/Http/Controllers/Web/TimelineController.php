@@ -62,6 +62,10 @@ class TimelineController extends Controller {
         $user_id = Auth::user()->id;
 
         $notifications= Notification::where('user_id',Auth::user()->id)->where('status',0)->get();
+        for ($i=0;$i<count($notifications);$i++)
+        {
+            $notifications[$i]['profile_pic'] = User::where('id', $notifications[$i]->notification_from)->first()['profile_pic'];
+        }
         
        $this->data['records'] = $posts->merge($shared_posts)->sortByDesc('created_at')->paginate($this->record_per_page);
 

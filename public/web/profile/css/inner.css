@@ -15,7 +15,7 @@
 	margin:0px 0px 0px 0px;
 	padding:14px 14px 24px 14px;
 	float:left;
-	width:350px;
+	width:480px;
 	border:1px solid #dbdbdb;
 	border-radius:5px;
 }
@@ -162,7 +162,7 @@ a.rule{
 	margin:0px 0px 0px 0px;
 	padding:0px 0px 0px 0px;
 	float:right;
-	width:580px;
+	width:590px;
 }
 
 	/****** follow ****/
@@ -320,7 +320,7 @@ a.rate-right:hover{
 }
 .part1{
 	margin:0px 0px 0px 0px;
-	padding:5px 10px 5px 100px;
+	padding:5px 10px 5px 77px;
 	border-bottom:1px solid #ededed;
 	position:relative;
 	overflow:hidden;
@@ -435,7 +435,7 @@ a.rate-right:hover{
 .part2-right{
 	margin:0px 0px 0px 0px;
 	padding:0px 0px 0px 0px;
-	width: 480px;
+	width: 492px;
 	float:right;
 	position:relative;
 }
@@ -603,7 +603,7 @@ img.react-pics{
 	margin:0px 0px 0px 0px;
 	padding:0px 0px 0px 0px;
 	float:right;
-	width: 475px;
+	width: 488px;
 }
 
 .box2-right h4{

@@ -2,7 +2,7 @@
 
 @section('content')
     <section id="post" class="post-page-content inner-page-mid-content profile-page-outer">
-        <div class="container" style="margin: 0 auto !important;">
+        <div class="container-fluid" style="margin: 0 auto !important;">
             <div class="row">
                 @include('web.common.leftsidebar')
                 <div class="col-lg-10 col-sm-8 col-md-10 col-xs-12">

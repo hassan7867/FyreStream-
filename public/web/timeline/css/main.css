@@ -1402,7 +1402,7 @@ ul.mkt-rt li a span{
   position: absolute;
   z-index: 1;
   top: -15px;
-  left: -7vw;
+  left: 0vw;
   background-color: #151515;
   overflow-x: hidden;
   transition: 0.5s;
@@ -1413,7 +1413,7 @@ ul.mkt-rt li a span{
 }
 .sidebarRight{
   left: inherit;
-  right: -7vw;
+  right: 0vw;
 }
 
 .sidebar a.closebtn{

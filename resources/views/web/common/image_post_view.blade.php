@@ -16,7 +16,7 @@
                 -->
               </div>
 
-              <div class="box2-right">
+              <div class="box2-right"  style="width: 91%">
                 <h4>{{$row->user->first_name}} {{$row->user->last_name}}</h4>
                 <p>{{$row->post_title}} <!-- >> With
                   <a href="#">Michel Wu</a> and
@@ -151,7 +151,7 @@
                     <a   href="{{route('profile',$comment->user->id)}}"><img src="/image/profileImages/{{$comment->user->profile_pic}}"
                                                                              class="cmnt-pic img-responsive img-circle" style="width: 46px;
     height: 44px;"></a>
-                      <div class="comnt-right">
+                      <div class="comnt-right" style="width: 90%">
                           <div class="comnt1-text">
                               <h4>{{$comment->user->first_name}} {{$comment->user->last_name}}
                                   <span>{{$comment->comment}}</span>
@@ -193,15 +193,15 @@
                 </div>
 
 
-                  <div class="write-comment" style="width: 96%!important;margin-top: 23px!important;">
-                      <form name="postComment" id="postComment_{{$row->id}}" method="post" enctype="multipart/form-data">
+                  <div class="write-comment" style="width: 100%!important;margin-top: 23px!important;">
+                      <form style="width: 100%;padding-top: 2%;" name="postComment" id="postComment_{{$row->id}}" method="post" enctype="multipart/form-data">
                           {{csrf_field()}}
                           <input type="hidden" name="post_id" value="{{$row->id}}">
-                          <div style="display: flex; align-items: flex-end;">
+                          <div style="display: flex; align-items: flex-end;width: 100%;padding-left: 3%;">
 
                               <img class="img-circle img-responsive commentProfileImage"
                                    src="/image/profileImages/{{Auth::user()->profile_pic}}">
-                              <div style="  display:inline-block;position:relative;">
+                              <div style="  display:inline-block;position:relative;;padding-left: 2%;">
                         <textarea name="comment" id="post-comment-{{$row->id}}" placeholder="Write a Comment.."
                                   style="display:block;width: 400px;margin-left: 10px"></textarea>
                                   <script type="text/javascript">
@@ -217,7 +217,7 @@
                                   <input type="file" name="image" id="comment-photo-{{$row->id}}" onchange="readPicURL(this)"
                                          style="display: none">
                               </div>
-                              <a href="javascript:void(0)">
+                              <a href="javascript:void(0)" style="padding-left: 2%;">
                                   <button type="button" post_id="{{$row->id}}" class="post_comment">Send</button>
                               </a>
                           </div>

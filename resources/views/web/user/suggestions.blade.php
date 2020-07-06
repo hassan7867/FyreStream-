@@ -2,7 +2,7 @@
 
 @section('content')
 <section id="post" class="post-page-content inner-page-mid-content">
-    <div class="container" style="margin: 0 auto !important;">
+    <div class="container-fluid" style="margin: 0 auto !important;">
       <div class="row">
         @include('web.common.leftsidebar')
         <div class="col-lg-7 col-sm-8 col-md-7 col-xs-12">
@@ -480,7 +480,7 @@
 
         <div class="col-lg-1 col-sm-2 col-md-1 col-xs-1 vd-post-pos-right-outer" style="padding: 0px; margin: 0px;">
           <div class="post-left vd-post-right">
-            <div id="mySidebar1" class="sidebar" style="left: -93px !important;">
+            <div id="mySidebar1" class="sidebar" style="left: -170px !important;">
               <div class="fixed-part">
                 <div class="home">
                   <div class="container">

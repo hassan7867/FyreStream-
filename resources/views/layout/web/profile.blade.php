@@ -178,7 +178,7 @@
                   </li>
 {{--                  <li>--}}
 
-                  
+
 
                   <li class="dropdown hdr-notification-dropdown">
                     <a class=" dropdown-toggle" type="button" data-toggle="dropdown">
@@ -187,18 +187,42 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li class="noti-dropdown-hdd">
-                        <h4>Notification</h4>
+                        <h4><i class="far fa-bell"></i> Notification</h4>
                       </li>
                       @if(count($notifications)>0)
-                       @foreach($notifications as $notify)
-                      <li><p>{{$notify->message}}</p><a class="req-cta req-accept-btn" href="{{route('accept_follow',[$notify->notification_from,$notify->id])}}">Accept</a><a style="margin-left: 2%;background-color: red;font-weight: 400;background: #fff;display: inline-block;width: auto;border-radius: 4px;border: 1px solid red;color: red;line-height: 16px;padding: 4px 8px;font-size: 13px;" href="{{route('reject_follow',[$notify->notification_from,$notify->id])}}">Reject</a> </li>
-                      @endforeach
-                      <li class="noti-dropdown-ftr"><a class="view-all-noti" href="">View All</a></li> 
+                        @foreach($notifications as $notify)
+                          <li style="padding-top: 0.5%;padding-bottom: 0.5%;padding-left: 0!important;padding-right: 0!important">
+                            <div style="background-color: #d3d3d342;padding: 3%">
+                              <div class="row">
+                                <div class="col-lg-3" style="width: 21%!important;line-height: 0!important"><img
+                                          style="height: 35px;width: 35px;object-fit: cover;"
+                                          src="/image/profileImages/{{$notify->profile_pic}}"
+                                          class=" img-responsive img-circle">&nbsp;
+                                </div>
+                                @if((strpos($notify->message, 'requested') == true))
+                                  <div class="col-lg-9" style="padding-left: 0!important;"><p
+                                            style="font-size: 12px">{{$notify->message}}</p></div>
+                                @else
+                                  <div class="col-lg-9" style="padding-left: 0!important;"><p
+                                            style="font-size: 12px;padding-top: 3%">{{$notify->message}}</p></div>
+                                @endif
+                              </div>
+                              @if((strpos($notify->message, 'requested') == true))
+                                <div style="padding-left: 17%">
+                                  <a class="req-cta req-accept-btn"
+                                     style="background: #0080009c!important;color: white!important;border: 1px solid #00800000!important;padding: 3px 8px!important;"
+                                     href="{{route('accept_follow',[$notify->notification_from,$notify->id])}}">Accept</a>
+                                  <a style="margin-left: 2%;background-color: red;font-weight: 400;background: #ff0000ba;display: inline-block;width: auto;border-radius: 4px;color: white;line-height: 16px;padding: 4px 8px;font-size: 13px;"
+                                     href="{{route('reject_follow',[$notify->notification_from,$notify->id])}}">Reject</a>
+                                </div>
+                              @endif
+                            </div>
+                          </li>
+                        @endforeach
+                        <li class="noti-dropdown-ftr"><a class="view-all-noti" href="">View All</a></li>
                       @else
-                      <li><p>No Notification</li>
+                        <li><p style="background-color: #d3d3d357;padding-left: 31%!important;padding: 33%;">No Notification</li>
                       @endif
-                      
-                     
                     </ul>
                   </li>
                     
