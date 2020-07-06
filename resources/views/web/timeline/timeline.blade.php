@@ -213,7 +213,7 @@
                         }
                         }else{?>
                         <div class="box2">
-                            <div class="box2-left">
+                            <div class="box2-left" style="width: 100%!important;text-align: center">
                                 <a href="#">
                                     No Record(s)
                                 </a>
