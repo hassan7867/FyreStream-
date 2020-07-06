@@ -372,17 +372,17 @@
                     '                                    </a>\n' +
                     '\n' +
                     '                                </div>'
-                let replyDiv = '<div id="reply-div-'+data.commentId+'"></div>';
+                let replyDiv = '<div id="reply-div-'+data.commentId+'"></div><br>';
                 if (data.image === ''){
                     var comment_div = '<div class="comnt1" style="padding-bottom:20px;"><img  style="width: 46px;height: 44px;" src="/image/profileImages/' + data.user_image + '"  class="cmnt-pic img-responsive img-circle">' +
                         '<div class="comnt-right" style="width: 90%"><div class="comnt1-text"><h4>' + data.user_name + '<span style="margin-left: 6px!important;">' + data.comment + '</span><br>' +'<div style="margin-top: 12px!important;font-size: 12px!important;" class="reply-comment-class" onclick="replyComment('+data.commentId+')">' + "- Reply" + '</div><br>'+
-                        ''+replySection+''+replyDiv+'</h4></div></div></div>'
+                        ''+replyDiv+''+replySection+'</h4></div></div></div>'
                 } else {
 
                     var comment_div = '<div class="comnt1" style="padding-bottom:20px;"><img  style="width: 46px;height: 44px;" src="/image/profileImages/' + data.user_image + '"  class="cmnt-pic img-responsive img-circle">' +
                         '<div class="comnt-right" style="width: 90%"><div class="comnt1-text"><h4>' + data.user_name + '<span style="margin-left: 6px!important;">' + data.comment + '</span><br>' +
                         '<div style="margin-top: 12px!important;font-size: 12px!important;" class="reply-comment-class" onclick="replyComment('+data.commentId+')">' + "Reply" + '</div><br>'+
-                        ''+replySection+''+replyDiv+'<img style="width: 150px!important;height: 150px!important;margin-top: 7px" src="/image/' + data.image + '"></h4></div></div></div>'
+                        ''+replyDiv+''+replySection+'<img style="width: 150px!important;height: 150px!important;margin-top: 7px" src="/image/' + data.image + '"></h4></div></div></div>'
                 }
                 console.log(post_id);
                 document.getElementById('post-comment-'+post_id).value="";
