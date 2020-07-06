@@ -16,7 +16,7 @@
                 -->
               </div>
 
-              <div class="box2-right">
+              <div class="box2-right" style="width: 91%">
                  <h4>{{$row->user->first_name}} {{$row->user->last_name}}</h4>
                 <p>{{$row->post_title}} <!-- >> With
                   <a href="#">Michel Wu</a> and
@@ -149,7 +149,7 @@
                   <div class="comnt1" style="padding-bottom:20px;">
                     <a   href="{{route('profile',$comment->user->id)}}"><img src="/image/profileImages/{{$comment->user->profile_pic}}" class="cmnt-pic img-responsive img-circle" style="width: 46px;
     height: 44px;"></a>
-                    <div class="comnt-right">
+                    <div class="comnt-right" style="width: 90%">
                       <div class="comnt1-text">
                         <h4>{{$comment->user->first_name}} {{$comment->user->last_name}}
                           <span>{{$comment->comment}}</span>

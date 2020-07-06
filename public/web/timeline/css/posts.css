@@ -46,7 +46,7 @@ ul{
 .post-mid{
 	margin:0px 0px 0px 5px;
 	padding:0px 0px 0px 0px;
-	width:620px;
+	/*width:620px;*/
 	float:left;
 }
 .box1{
@@ -59,7 +59,7 @@ ul{
 }
 .part1{
 	margin:0px 0px 0px 0px;
-	padding:0px 10px 0px 100px;
+	padding:0px 10px 0px 77px;
 	border-bottom:1px solid #ededed;
 	position:relative;
 	overflow:hidden;
@@ -179,7 +179,7 @@ ul{
 .part2-right{
 	margin:0px 0px 0px 0px;
 	padding:0px 0px 0px 0px;
-	width:515px;
+	width:634px;
 	float:right;
 	position:relative;
 }
@@ -297,7 +297,7 @@ a.publish span{
 	margin:0px 0px 0px 0px;
 	padding:0px 0px 0px 0px;
 	float:left;
-	width:41px;
+	width:47px;
 }
 .box2-left ul{
 	margin:12px 0px 0px 0px;
@@ -342,7 +342,7 @@ img.react-pics{
 	margin:0px 0px 0px 0px;
 	padding:0px 0px 0px 0px;
 	float:right;
-	width: 540px;
+	width: 650px;
 }
 
 .box2-right h4{
@@ -448,7 +448,7 @@ a.moment span{
     float: left;
     overflow: hidden;
     position: relative;
-    height: 170px;
+    height: 270px;
 }
 .view11 a:hover{
 	color:#fff;
@@ -1267,7 +1267,7 @@ ul.lt-side li a span{
 	margin:0px 0px 0px 15px;
 	padding:0px 0px 0px 0px;
 	float:right;
-	max-width:300px;
+	/*max-width:300px;*/
 	width:100%;
 	border:1px solid #eaeaea;
 	border-radius:5px;

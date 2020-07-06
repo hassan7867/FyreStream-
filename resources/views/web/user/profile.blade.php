@@ -2,14 +2,14 @@
 
 @section('content')
   <section id="post" class="post-page-content inner-page-mid-content profile-page-outer">
-    <div class="container" style="margin: 0 auto !important;">
+    <div class="container-fluid" style="margin: 0 auto !important;">
       <div class="row">
          @include('web.common.leftsidebar')
         <div class="col-lg-10 col-sm-8 col-md-10 col-xs-12">
 
           <div class="inner-row">
             <div class="inner-flex">
-                <div class="inner-left">
+                <div class="inner-left" style="width: 40%">
                     <div class="inner-head">
                         <h4>{{$user->first_name}} {{$user->last_name}}</h4>
                           <ul>
@@ -55,7 +55,7 @@
                       </div>
                   </div>
                   
-                  <div class="inner-right">
+                  <div class="inner-right" style="width: 58%">
                   
                     <div class="follow">
                         <h2><img src="/web/profile/images/dott.png" class="dott img-responsive"><span>The world is yours for the taking. Follow destiny.</span></h2>
@@ -164,7 +164,7 @@
                                               <img src="/web/profile/images/tanya2.png" class="tnya img-responsive">
                                           </div>
 
-                                          <div class="part2-right">
+                                          <div class="part2-right" style="width: 86%">
                                               <form name="add-text-post" id="addTextPost" method="post"
                                                     action="{{route('add_post_text')}}">
                                                   {{csrf_field()}}
@@ -241,7 +241,7 @@
 
         <div class="col-lg-1 col-sm-2 col-md-1 col-xs-1 vd-post-pos-right-outer" style="padding: 0px; margin: 0px;">
           <div class="post-left vd-post-right">
-            <div id="mySidebar1" class="sidebar" style="left: -93px !important;">
+            <div id="mySidebar1" class="sidebar" style="left: -170px !important;">
               <div class="fixed-part">
                 <div class="home">
                   <div class="container">

@@ -5,7 +5,7 @@
                               <a href="#" class="on-pro"><img src="/web/profile/images/pro.png" class="img-responsive"></a>
                               </div>
                               
-                              <div class="box2-right">
+                              <div class="box2-right" style="width: 86%">
                                   <h4>{{$user->first_name}} {{$user->last_name}}</h4>
                                   <p>{{$row->post_title}}</p>
                                   <!-- <h6><img src="/web/profile/images/double-arrow.png" class="db img-responsive"><span>with <a href="#">Michel Wu</a> and <a href="#">17 Others.</a></span></h6> -->

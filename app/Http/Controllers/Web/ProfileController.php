@@ -65,6 +65,10 @@ class ProfileController extends Controller
             }
 
         $notifications = Notification::where('user_id', Auth::user()->id)->where('status', 0)->get();
+        for ($i=0;$i<count($notifications);$i++)
+        {
+            $notifications[$i]['profile_pic'] = User::where('id', $notifications[$i]->notification_from)->first()['profile_pic'];
+        }
 
         $posts = Post::where('user_id', $user_id)->with('comments.user')->get();
         //dd($posts->get());

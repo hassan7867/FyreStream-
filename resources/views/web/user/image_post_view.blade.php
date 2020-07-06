@@ -5,7 +5,7 @@
                               <a href="#" class="on-pro"><img src="/web/profile/images/pro.png" class="img-responsive"></a>
                               </div>
                               
-                              <div class="box2-right">
+                              <div class="box2-right" style="width: 86%">
                                   <h4>{{$user->first_name}} {{$user->last_name}}</h4>
                                   <p>{{$row->post_title}}</p>
                                  <p class="b-bottom" id="append_result_{{$row->id}}">

@@ -26,7 +26,10 @@ class ProfileSettingsController extends Controller
         $user = User::where('id', $user_id)->where('status', 1)->first();
         $is_following = Follower::where('user_id', $user_id)->where('follower_id', Auth::user()->id)->count();
         $notifications = Notification::where('user_id', Auth::user()->id)->where('status', 0)->get();
-
+        for ($i=0;$i<count($notifications);$i++)
+        {
+            $notifications[$i]['profile_pic'] = User::where('id', $notifications[$i]->notification_from)->first()['profile_pic'];
+        }
         $posts = Post::where('user_id', $user_id)->with('comments.user')->get();
         //dd($posts->get());
         $posts = Post::where('status', 1)->where('user_id', $user_id)->with('user')->with('share')->with('reacts')->with('myreact')->with('comments.user')->get();

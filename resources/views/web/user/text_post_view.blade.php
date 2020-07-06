@@ -5,7 +5,7 @@
                               <a href="#" class="on-pro"><img src="/web/profile/images/pro.png" class="img-responsive"></a>
                           </div>
                           
-                          <div class="box4-right">
+                          <div class="box4-right" style="width: 86%">
                               <div class="sandy">
                                   <div class="sandy-row">
                                       <div class="sandy-left">

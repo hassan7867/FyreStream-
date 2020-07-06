@@ -144,7 +144,7 @@
               </div>
             </div>
 
-<div class="col-lg-1 col-sm-2 col-md-1 col-xs-1 vd-post-pos-left-outer" style="padding: 0px; margin: 0px;">
+<div class="col-lg-1 col-sm-2 col-md-1 col-xs-1 vd-post-pos-left-outer" style="padding: 0px; margin: 0px;padding-left: 12px">
           <div class="post-left">
             
             <div class="left-menu" onclick="openNav()">

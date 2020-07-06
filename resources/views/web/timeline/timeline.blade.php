@@ -12,11 +12,11 @@
 </style>
 @section('content')
     <section id="post" class="post-page-content inner-page-mid-content">
-        <div class="container" style="margin: 0 auto !important;">
+        <div class="container-fluid" style="margin: 0 auto !important;">
             <div class="row">
                 @include('web.common.leftsidebar')
                 <div class="col-lg-7 col-sm-8 col-md-7 col-xs-12">
-                    <div class="post-mid">
+                    <div class="post-mid" style="width: 100%">
                         <div class="box1">
                             <div class="part1">
                                 <ul class="left">
@@ -78,7 +78,7 @@
     height: 54px;">
                                 </div>
 
-                                <div class="part2-right">
+                                <div class="part2-right" style="width: 86%">
                                     <form name="add-text-post" id="addTextPost" method="post"
                                           action="{{route('add_post_text')}}">
                                         {{csrf_field()}}
@@ -1080,11 +1080,9 @@
                                 <div class="modal-footer" style="margin-left: -30px!important">
 
                                         <div class="col-md-4">
-                                            <select class="form-control" id="sel1" name="sellist1" style="width: 229px!important">
-                                                <option selected>Public Audience</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
+                                            <select class="form-control fas" id="sel1" name="sellist1" style="width: 229px!important;font-family: 'Font Awesome 5 Free'">
+                                                <option selected class="fas"> &#xf57d; Public Audience</option>
+                                                <option class="fas"> &#xf502; Private Audience</option>
                                             </select>
                                         </div>
                                         <div class="col-md-4" style="margin-left: 45px!important;" >
